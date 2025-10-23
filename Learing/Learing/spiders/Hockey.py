@@ -7,8 +7,13 @@ class HockeySpider(CrawlSpider):
     allowed_domains = ["www.scrapethissite.com"]
     start_urls = ["https://www.scrapethissite.com/pages/forms/"]
     rules = [Rule(LinkExtractor(allow=r'page_num=\d+'), callback='parse', follow=True)]  #made for pagination
+    
+    custom_settings = {
+        'USER_AGENT' : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+    }
 
     def parse(self, response):
+        print(response.request.headers)
         team_row = response.css("table.table tr.team") # got all the table
         
         
