@@ -51,7 +51,14 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
     'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,
+    
+    
+    
+    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 }
+
+Rotating_Proxy_List_Part = 'proxies.txt'
 
 # Add these required settings
 FAKEUSERAGENT_PROVIDERS = [
@@ -59,6 +66,10 @@ FAKEUSERAGENT_PROVIDERS = [
     'scrapy_fake_useragent.providers.FakerProvider',
     'scrapy_fake_useragent.providers.FixedUserAgentProvider',
 ]
+
+ROTATING_PROXY_PAGE_RETRY_TIMES = 5
+ROTATING_PROXY_BACKOFF_BASE = 300
+ROTATING_PROXY_CLOSE_SPIDER = False
 
 
 # Enable or disable extensions
