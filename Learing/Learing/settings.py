@@ -46,30 +46,26 @@ DOWNLOAD_DELAY = 1
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
+# ... other settings ...
+
+# ... other settings like BOT_NAME, etc. ...
+
 DOWNLOADER_MIDDLEWARES = {
-    "Learing.middlewares.LearingDownloaderMiddleware": 543,
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,  # Disable default UA
     'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
     'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,
-    
-    
-    
-    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
-    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+    'Learing.middlewares.LearingDownloaderMiddleware': 543,
+    # 'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+    # 'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 }
 
-Rotating_Proxy_List_Part = 'proxies.txt'
+ROTATING_PROXY_LIST_PATH = 'proxies.txt'  # Correct name; assumes file is in project root
 
-# Add these required settings
-FAKEUSERAGENT_PROVIDERS = [
-    'scrapy_fake_useragent.providers.FakeUserAgentProvider',
-    'scrapy_fake_useragent.providers.FakerProvider',
-    'scrapy_fake_useragent.providers.FixedUserAgentProvider',
-]
-
-ROTATING_PROXY_PAGE_RETRY_TIMES = 5
-ROTATING_PROXY_BACKOFF_BASE = 300
-ROTATING_PROXY_CLOSE_SPIDER = False
+# Optional for better debugging
+ROTATING_PROXY_LOGSTATS_INTERVAL = 10  # Log proxy stats every 10 seconds
+ROTATING_PROXY_PAGE_RETRY_TIMES = 5  # Retry failed pages with new proxies
+ROTATING_PROXY_BACKOFF_BASE = 300  # Backoff for dead proxies (seconds)
+LOG_LEVEL = 'DEBUG'  # More verbose logs to see middleware activity
 
 
 # Enable or disable extensions
