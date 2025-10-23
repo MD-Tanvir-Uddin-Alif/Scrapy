@@ -16,7 +16,7 @@ class HockeySpider(CrawlSpider):
         print(response.request.headers)
         team_row = response.css("table.table tr.team") # got all the table
         
-        
+         
         for team_info in team_row:    # going through all the table
             
             team_name = team_info.css("td.name::text").get().strip()
